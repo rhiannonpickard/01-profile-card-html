@@ -4,57 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Profile Card</title>
-    <style>
-        body {
-            background: #f4f4f4;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .profile-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            padding: 2rem;
-            width: 320px;
-            text-align: center;
-        }
-        .profile-card img {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-        .profile-card h2 {
-            margin: 0.5rem 0 0.25rem 0;
-            font-size: 1.5rem;
-        }
-        .profile-card p {
-            color: #666;
-            margin: 0.25rem 0 1rem 0;
-            font-size: 1rem;
-        }
-        .profile-card .socials a {
-            margin: 0 0.5rem;
-            color: #0077b5;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-    </style>
+
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+
 </head>
 <body>
+
+    <nav class="pink-navbar">
+        <ul class="pink-navbar-list">
+            <div class="navbar-bubble"></div>
+            <li><a href="#" class="pink-navbar-link active">🏠 Home</a></li>
+            <li><a href="#" class="pink-navbar-link">📄 Resume</a></li>
+            <li><a href="#" class="pink-navbar-link">🎓 Education</a></li>
+            <li><a href="#" class="pink-navbar-link">✨ More!</a></li>
+        </ul>
+    </nav>
     <div class="profile-card">
-        <img src="https://via.placeholder.com/96" alt="Profile Picture">
-        <h2>Jane Doe</h2>
-        <p>Web Developer</p>
+        <div class="cute-symbols">✨ 🌸 🌸 🌸 ✨ </div>
+        <img src="img/Profile_Pic.JPG" alt="Profile Picture">
+        <button class="name-btn"><span class="icon">👑</span> Rhiannon Pickard</button>
+        <br>
+        <p class="epic-title">Web Developer</p>
         <p>Passionate about building user-friendly web applications.</p>
         <div class="socials">
-            <a href="#" title="LinkedIn">LinkedIn</a>
-            <a href="#" title="GitHub">GitHub</a>
-            <a href="#" title="Twitter">Twitter</a>
+            <a href="https://www.linkedin.com/in/rhiannon-pickard/" title="LinkedIn">LinkedIn</a>
+            <a href="https://github.com/rhiannonpickard" title="GitHub">GitHub</a>
+            <a href="https://www.instagram.com/rio.herself" title="Insta">Insta</a>
         </div>
     </div>
 </body>

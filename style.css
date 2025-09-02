@@ -1,17 +1,72 @@
+/* CSS Variables for consistency */
+:root {
+    --primary-gradient: linear-gradient(90deg, #ffb6e6 0%, #e0aaff 100%);
+    --primary-pink: #d71998;
+    --dark-pink: #b4007a;
+    --darker-pink: #7a0050;
+    --light-pink: #ffb6e6;
+    --purple: #e0aaff;
+    --white-translucent: rgba(255, 255, 255, 0.3);
+    --font-family: 'Baloo 2', 'Comic Sans MS', 'Fredoka One', 'cursive', sans-serif;
+    --border-radius: 2rem;
+    --transition: all 0.3s ease;
+}
+
 /* Pink pill navigation bar */
 .pink-navbar {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(90deg, #ffb6e6 0%, #e0aaff 100%);
-    box-shadow: 0 -2px 16px #e0aaff33;
-    padding: 1.2rem 0 1.2rem 0;
+    background: var(--primary-gradient);
+    box-shadow: 
+        0 -2px 16px rgba(0, 0, 0, 0.15),
+        0 -8px 32px rgba(0, 0, 0, 0.08);
+    padding: 1.2rem 0;
     position: fixed;
     left: 0;
     bottom: 0;
     z-index: 100;
+    overflow: hidden;
 }
+
+.pink-navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        rgba(255, 255, 255, 0.05) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pink-navbar::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent 40%, 
+        rgba(255, 255, 255, 0.15) 50%, 
+        transparent 60%);
+    animation: reflection-sweep 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes reflection-sweep {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(0%) translateY(0%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
 .pink-navbar-list {
     display: flex;
     gap: 1.2rem;
@@ -19,39 +74,41 @@
     padding: 0;
     list-style: none;
     position: relative;
+    z-index: 3;
 }
 
 /* Liquid glass bubble */
 .navbar-bubble {
     position: absolute;
     top: 50%;
+    left: 0;
+    width: 0;
+    height: 0;
     transform: translateY(-50%);
     background: rgba(255, 240, 250, 0.9);
     backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--white-translucent);
     box-shadow: 
         0 8px 32px rgba(255, 182, 230, 0.4),
         0 2px 8px rgba(224, 170, 255, 0.3) inset,
         0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
     z-index: -1;
 }
 
 .pink-navbar-link {
     display: inline-block;
-    font-family: 'Baloo 2', 'Comic Sans MS', 'Fredoka One', 'cursive', sans-serif;
+    font-family: var(--font-family);
     font-size: 1.15rem;
     font-weight: 700;
-    color: #b4007a;
+    color: var(--dark-pink);
     background: transparent;
     border: none;
-    outline: none;
-    border-radius: 2rem;
+    border-radius: var(--border-radius);
     padding: 0.6rem 1.8rem;
     transition: color 0.3s ease, transform 0.2s ease;
-    box-shadow: none;
     text-decoration: none;
     letter-spacing: 1px;
     position: relative;
@@ -59,16 +116,15 @@
 }
 
 .pink-navbar-link.active {
-    color: #d71998;
+    color: var(--primary-pink);
     transform: scale(1.05);
-    text-decoration: none;
 }
 
 .pink-navbar-link:hover:not(.active) {
     color: #c71088;
     transform: scale(1.02);
-    text-decoration: none;
 }
+/* Mobile responsive navbar */
 @media (max-width: 600px) {
     .pink-navbar-list {
         gap: 0.5rem;
@@ -79,16 +135,18 @@
         font-size: 1rem;
     }
 }
+
 /* Collapsible Navigation Bar */
 .collapsible-nav {
     position: absolute;
     top: 1.5rem;
     left: 1.5rem;
     z-index: 100;
-    font-family: 'Baloo 2', 'Comic Sans MS', 'Fredoka One', 'cursive', sans-serif;
+    font-family: var(--font-family);
 }
+
 .nav-btn {
-    background: linear-gradient(135deg, #ffb6e6 0%, #e0aaff 100%);
+    background: linear-gradient(135deg, var(--light-pink) 0%, var(--purple) 100%);
     border-radius: 1.5rem;
     box-shadow: 0 2px 8px #e0aaff66;
     padding: 0.5rem 1.2rem;
@@ -97,17 +155,20 @@
     align-items: center;
     border: 2px solid #fff0fa;
     font-size: 1.5rem;
-    color: #b4007a;
+    color: var(--dark-pink);
     transition: background 0.2s, box-shadow 0.2s;
 }
+
 .nav-btn:hover {
-    background: linear-gradient(135deg, #e0aaff 0%, #ffb6e6 100%);
+    background: linear-gradient(135deg, var(--purple) 0%, var(--light-pink) 100%);
     box-shadow: 0 4px 16px #ffb6e6cc;
 }
+
 .nav-icon {
     font-size: 2rem;
     line-height: 1;
 }
+
 .nav-content {
     display: flex;
     flex-direction: column;
@@ -125,13 +186,15 @@
     transform: translateY(-10px) scale(0.95);
     transition: opacity 0.2s, transform 0.2s;
 }
+
 #nav-toggle:checked ~ .nav-content {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0) scale(1);
 }
+
 .nav-link {
-    color: #b4007a;
+    color: var(--dark-pink);
     font-size: 1.1rem;
     font-weight: 700;
     text-decoration: none;
@@ -140,19 +203,20 @@
     transition: background 0.15s, color 0.15s;
     text-align: left;
 }
+
 .nav-link:hover {
     background: #ffe0f7;
-    color: #7a0050;
+    color: var(--darker-pink);
 }
+
 .epic-title {
     font-size: 1.35rem;
     font-weight: 900;
-    background: linear-gradient(90deg, #ffb6e6 10%, #e0aaff 60%, #fcb1e0 100%);
-    color: #7a0050;
+    background: linear-gradient(90deg, var(--light-pink) 10%, var(--purple) 60%, #fcb1e0 100%);
+    color: var(--darker-pink);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
     letter-spacing: 2px;
     text-shadow: 0 2px 16px #e0aaff99, 0 1px 2px #ffb6e6cc, 0 0 8px #fff8;
     margin: 0.5rem 0 1rem 0;
@@ -168,17 +232,22 @@
     0% { box-shadow: 0 0 8px 2px #e0aaff33 inset, 0 0 0 #ffb6e6; }
     100% { box-shadow: 0 0 16px 4px #ffb6e6cc, 0 0 8px 2px #e0aaff33 inset; }
 }
-/* style.css */
+/* Body styling with animated background */
 body {
-    background: linear-gradient(135deg, #ffb6e6 0%, #fcb1e0 40%, #e0aaff 100%);
-    position: relative;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, var(--light-pink) 0%, #fcb1e0 40%, var(--purple) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
+    padding: 2rem 1rem 8rem 1rem;
+    position: relative;
 }
 
 body::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     pointer-events: none;
     background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><g><circle cx="10" cy="10" r="2" fill="white" opacity="0.7"/><circle cx="80" cy="20" r="1.5" fill="white" opacity="0.5"/><circle cx="50" cy="70" r="2.5" fill="white" opacity="0.6"/><circle cx="90" cy="90" r="1.2" fill="white" opacity="0.4"/><circle cx="30" cy="40" r="1.8" fill="white" opacity="0.7"/><polygon points="60,10 62,14 66,14 63,17 64,21 60,19 56,21 57,17 54,14 58,14" fill="white" opacity="0.8"/></g></svg>');
     background-repeat: repeat;
@@ -192,20 +261,13 @@ body::before {
     100% { background-position: 120px 120px; }
 }
 
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 2rem 1rem 8rem 1rem;
-}
+/* Profile card styling */
 .profile-card {
     background: #fff;
     border-radius: 24px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 0 0 6px #ffe0f7, 0 0 24px 6px #e0aaff66;
     border: 4px solid;
-    border-image: linear-gradient(120deg, #ffb6e6 10%, #fcb1e0 40%, #e0aaff 90%) 1;
+    border-image: linear-gradient(120deg, var(--light-pink) 10%, #fcb1e0 40%, var(--purple) 90%) 1;
     padding: 2.5rem;
     width: 500px;
     max-width: 90vw;
@@ -221,6 +283,7 @@ body {
     justify-content: center;
     gap: 0.5rem;
 }
+
 .profile-card img {
     width: 98px;
     height: 120px;
@@ -230,96 +293,86 @@ body {
     display: block;
     margin: 0 auto 2rem auto;
 }
+
+/* Simplified name button with consolidated properties */
 .name-btn {
     margin: 0.5rem 0 0.25rem 0;
     font-size: 1.5rem;
-    background: linear-gradient(135deg, #ffb6e6 0%, #fcb1e0 40%, #e0aaff 100%);
-    box-shadow: 0 4px 24px 0 rgba(255, 182, 230, 0.25), 0 1.5px 6px 0 rgba(255,255,255,0.25) inset, 0 0 16px 2px #fff5 inset;
-    position: relative;
-    overflow: hidden;
-    border-radius: 2rem;
-    box-shadow: 0 4px 24px 0 rgba(255, 182, 230, 0.25), 0 1.5px 6px 0 rgba(255,255,255,0.25) inset;
-    backdrop-filter: blur(2px) brightness(1.15);
-    padding: 0.5rem 1.5rem;
-    color: #d71998;
-    border: 2px solid #fff0fa;
-    display: inline-block;
     font-weight: bold;
+    background: linear-gradient(135deg, var(--light-pink) 0%, #fcb1e0 40%, var(--purple) 100%);
+    border-radius: var(--border-radius);
+    border: 2px solid #fff0fa;
+    padding: 0.5rem 1.5rem;
+    color: var(--primary-pink);
+    display: inline-block;
     letter-spacing: 1px;
-    text-shadow: 0 1px 8px #fff7, 0 0px 2px #e0aaff;
+    text-shadow: 0 1px 8px #fff7, 0 0px 2px var(--purple);
     cursor: pointer;
     transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
     outline: none;
     position: relative;
     z-index: 2;
+    box-shadow: 
+        0 4px 24px 0 rgba(255, 182, 230, 0.25), 
+        0 1.5px 6px 0 rgba(255,255,255,0.25) inset;
+    backdrop-filter: blur(6px);
+    overflow: hidden;
 }
+
 .name-btn::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     background: linear-gradient(120deg, rgba(255,255,255,0.35) 10%, rgba(255,255,255,0.10) 60%, rgba(255,255,255,0.0) 100%);
     pointer-events: none;
-    border-radius: 2rem;
+    border-radius: var(--border-radius);
     z-index: 1;
 }
-.name-btn {
-    border-radius: 2rem;
-    box-shadow: 0 4px 24px 0 rgba(255, 182, 230, 0.25), 0 1.5px 6px 0 rgba(255,255,255,0.25) inset;
-    backdrop-filter: blur(6px);
-    padding: 0.5rem 1.5rem;
-    color: #d71998;
-    border: 2px solid #fff0fa;
-    display: inline-block;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-shadow: 0 1px 8px #fff7, 0 0px 2px #e0aaff;
-    cursor: pointer;
-    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
-    outline: none;
-    position: relative;
-    z-index: 2;
-}
+
 .name-btn .icon {
     margin-right: 0.6rem;
     font-size: 1.6rem;
     vertical-align: middle;
 }
+
 .name-btn:hover, .name-btn:focus {
     transform: scale(1.08) rotate(-2deg);
     box-shadow: 0 8px 32px 0 rgba(255, 182, 230, 0.35), 0 2px 8px 0 rgba(255,255,255,0.25) inset;
     background: rgba(255,255,255,0.55);
-    color: #b4007a;
+    color: var(--dark-pink);
 }
+
 .profile-card p {
     color: #666;
     margin: 0.25rem 0 1rem 0;
     font-size: 1rem;
 }
+
 .profile-card .socials a {
-    margin: 0 0.5rem;
-    color: #d71998;
+    margin: 0 0.5rem 0.5rem;
+    color: var(--primary-pink);
     text-decoration: none;
     font-size: 1.35rem;
-    font-family: 'Baloo 2', 'Comic Sans MS', 'Fredoka One', 'cursive', sans-serif;
+    font-family: var(--font-family);
     font-weight: 900;
     letter-spacing: 1.5px;
     padding: 0.4rem 1.2rem;
-    border-radius: 2rem;
+    border-radius: var(--border-radius);
     background: rgba(255,255,255,0.35);
     box-shadow: 0 2px 12px 0 #e0aaff66, 0 1px 4px 0 #ffb6e688 inset;
     text-shadow: 0 2px 8px #fff7, 0 1px 2px #e0aaffcc, 0 0 6px #ffb6e6aa;
     transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
     display: inline-block;
-    margin-bottom: 0.5rem;
 }
+
 .profile-card .socials a:hover {
     transform: scale(1.09) rotate(-2deg);
     box-shadow: 0 6px 24px 0 #ffb6e6cc, 0 2px 8px 0 #e0aaff99 inset;
     background: rgba(255,255,255,0.55);
-    color: #b4007a;
+    color: var(--dark-pink);
 }
 
-/* Resume PDF Styles */
+/* Resume PDF and actions */
 .resume-pdf-container {
     margin: 1.5rem 0;
     width: 100%;
@@ -344,17 +397,17 @@ body {
 
 .resume-download-btn, .resume-view-btn {
     display: inline-block;
-    font-family: 'Baloo 2', 'Comic Sans MS', 'Fredoka One', 'cursive', sans-serif;
+    font-family: var(--font-family);
     font-size: 1.1rem;
     font-weight: 700;
-    color: #d71998;
+    color: var(--primary-pink);
     background: rgba(255,255,255,0.4);
-    border: 2px solid #e0aaff;
+    border: 2px solid var(--purple);
     border-radius: 1.5rem;
     padding: 0.7rem 1.5rem;
     text-decoration: none;
     letter-spacing: 1px;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     box-shadow: 0 4px 16px rgba(224, 170, 255, 0.3);
     text-align: center;
     min-width: 140px;
@@ -364,31 +417,15 @@ body {
     background: rgba(255,255,255,0.7);
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 8px 24px rgba(255, 182, 230, 0.4);
-    color: #b4007a;
-    border-color: #ffb6e6;
+    color: var(--dark-pink);
+    border-color: var(--light-pink);
 }
 
 .resume-download-btn:active, .resume-view-btn:active {
     transform: translateY(0) scale(1.02);
 }
 
-@media (max-width: 600px) {
-    .resume-pdf-container iframe {
-        height: 400px;
-    }
-    
-    .resume-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .resume-download-btn, .resume-view-btn {
-        width: 80%;
-        max-width: 250px;
-    }
-}
-
-/* Page Transition Animations */
+/* Page transition animations */
 .profile-card.slide-up {
     animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
@@ -398,28 +435,16 @@ body {
 }
 
 @keyframes slideUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100vh);
-        opacity: 0;
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 @keyframes slideIn {
-    0% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    0% { transform: translateY(100vh); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Pretty Resume List Styles */
+/* Resume list styling */
 .resume-list {
     list-style: none;
     padding: 0;
@@ -436,10 +461,10 @@ body {
     padding: 1.2rem 1.5rem;
     position: relative;
     box-shadow: 0 4px 16px rgba(255, 182, 230, 0.2), 0 2px 8px rgba(224, 170, 255, 0.1) inset;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: var(--transition) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: 1.05rem;
     line-height: 1.5;
-    color: #7a0050;
+    color: var(--darker-pink);
     backdrop-filter: blur(10px);
     overflow: hidden;
 }
@@ -450,14 +475,15 @@ body {
     border-color: rgba(255, 182, 230, 0.5);
 }
 
+/* Consolidated emoji styling for list items */
 .resume-list li::before {
-    content: '✨';
     position: absolute;
     top: 0.8rem;
     left: 0.8rem;
     font-size: 1.2rem;
     opacity: 0.7;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    content: '✨'; /* Default */
 }
 
 .resume-list li:hover::before {
@@ -483,52 +509,25 @@ body {
 }
 
 @keyframes shimmer {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%) rotate(45deg);
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(100%) rotate(45deg);
-    }
+    0% { opacity: 0; transform: translateX(-100%) rotate(45deg); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(100%) rotate(45deg); }
 }
 
-/* Special styling for different content types */
-.resume-list li:nth-child(1)::before {
-    content: '🎯';
-}
+/* Specific emoji overrides */
+.resume-list li:nth-child(1)::before { content: '🎯'; }
+.resume-list li:nth-child(2)::before { content: '🌸'; }
+.resume-list li:nth-child(3)::before { content: '💼'; }
+.resume-list li:nth-child(4)::before { content: '🌟'; }
+.resume-list li:nth-child(5)::before { content: '💖'; }
 
-.resume-list li:nth-child(2)::before {
-    content: '🌸';
-}
-
-.resume-list li:nth-child(3)::before {
-    content: '✨';
-}
-
-.resume-list li:nth-child(4)::before {
-    content: '🌟';
-}
-
-.resume-list li:nth-child(5)::before {
-    content: '💖';
-}
-
-/* Education page specific styling */
+/* Page-specific emoji styling with consolidated animations */
 .profile-card:has(.cute-symbols:contains("🎓")) .resume-list li:nth-child(1)::before {
     content: '🎓';
     font-size: 1.8rem;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.4);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
     animation: educationGlow 2s ease-in-out infinite alternate;
     filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
-}
-
-.profile-card:has(.cute-symbols:contains("🎓")) .resume-list li:nth-child(1):hover::before {
-    transform: rotate(20deg) scale(1.4);
-    text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 35px rgba(255, 215, 0, 0.6);
 }
 
 .profile-card:has(.cute-symbols:contains("🎓")) .resume-list li:nth-child(2)::before {
@@ -538,85 +537,56 @@ body {
     animation: bookFloat 3s ease-in-out infinite alternate;
 }
 
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(1)::before { content: '🏆'; }
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(2)::before { content: '⭐'; }
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(3)::before { content: '💼'; }
+
 @keyframes educationGlow {
     0% {
-        text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.4);
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
         filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
     }
     100% {
-        text-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.7);
+        text-shadow: 0 0 25px rgba(255, 215, 0, 1);
         filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9));
     }
 }
 
 @keyframes bookFloat {
-    0% {
-        transform: translateY(0px);
-    }
-    100% {
-        transform: translateY(-3px);
-    }
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-3px); }
 }
 
-/* More page specific styling */
-.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(1)::before {
-    content: '🏆';
-}
-
-.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(2)::before {
-    content: '⭐';
-}
-
-.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(3)::before {
-    content: '💼';
-}
-
-.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(4)::before {
-    content: '🌸';
-}
-
-/* Individual card stagger animation */
-.resume-list li:nth-child(1) {
-    animation: slideInUp 0.6s ease-out 0.1s both;
-}
-
-.resume-list li:nth-child(2) {
-    animation: slideInUp 0.6s ease-out 0.2s both;
-}
-
-.resume-list li:nth-child(3) {
-    animation: slideInUp 0.6s ease-out 0.3s both;
-}
-
-.resume-list li:nth-child(4) {
-    animation: slideInUp 0.6s ease-out 0.4s both;
-}
-
-.resume-list li:nth-child(5) {
-    animation: slideInUp 0.6s ease-out 0.5s both;
-}
+/* Stagger animation for list items */
+.resume-list li:nth-child(1) { animation: slideInUp 0.6s ease-out 0.1s both; }
+.resume-list li:nth-child(2) { animation: slideInUp 0.6s ease-out 0.2s both; }
+.resume-list li:nth-child(3) { animation: slideInUp 0.6s ease-out 0.3s both; }
+.resume-list li:nth-child(4) { animation: slideInUp 0.6s ease-out 0.4s both; }
+.resume-list li:nth-child(5) { animation: slideInUp 0.6s ease-out 0.5s both; }
 
 @keyframes slideInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
-    .resume-list li {
-        padding: 1rem 1.2rem;
-        font-size: 1rem;
+    .resume-pdf-container iframe { height: 400px; }
+    .resume-actions { 
+        flex-direction: column; 
+        align-items: center; 
     }
-    
-    .resume-list li::before {
-        top: 0.6rem;
-        left: 0.6rem;
-        font-size: 1rem;
+    .resume-download-btn, .resume-view-btn { 
+        width: 80%; 
+        max-width: 250px; 
+    }
+    .resume-list li { 
+        padding: 1rem 1.2rem; 
+        font-size: 1rem; 
+    }
+    .resume-list li::before { 
+        top: 0.6rem; 
+        left: 0.6rem; 
+        font-size: 1rem; 
     }
 }

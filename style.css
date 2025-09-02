@@ -418,3 +418,205 @@ body {
         opacity: 1;
     }
 }
+
+/* Pretty Resume List Styles */
+.resume-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resume-list li {
+    background: linear-gradient(135deg, rgba(255, 240, 250, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+    border: 2px solid rgba(224, 170, 255, 0.3);
+    border-radius: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(255, 182, 230, 0.2), 0 2px 8px rgba(224, 170, 255, 0.1) inset;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #7a0050;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.resume-list li:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(255, 182, 230, 0.3), 0 4px 12px rgba(224, 170, 255, 0.2) inset;
+    border-color: rgba(255, 182, 230, 0.5);
+}
+
+.resume-list li::before {
+    content: '✨';
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.resume-list li:hover::before {
+    transform: rotate(20deg) scale(1.2);
+    opacity: 1;
+}
+
+.resume-list li::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.resume-list li:hover::after {
+    animation: shimmer 0.8s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%) rotate(45deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* Special styling for different content types */
+.resume-list li:nth-child(1)::before {
+    content: '🎯';
+}
+
+.resume-list li:nth-child(2)::before {
+    content: '🌸';
+}
+
+.resume-list li:nth-child(3)::before {
+    content: '✨';
+}
+
+.resume-list li:nth-child(4)::before {
+    content: '🌟';
+}
+
+.resume-list li:nth-child(5)::before {
+    content: '💖';
+}
+
+/* Education page specific styling */
+.profile-card:has(.cute-symbols:contains("🎓")) .resume-list li:nth-child(1)::before {
+    content: '🎓';
+    font-size: 1.8rem;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.4);
+    animation: educationGlow 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+.profile-card:has(.cute-symbols:contains("🎓")) .resume-list li:nth-child(1):hover::before {
+    transform: rotate(20deg) scale(1.4);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 35px rgba(255, 215, 0, 0.6);
+}
+
+.profile-card:has(.cute-symbols:contains("🎓")) .resume-list li:nth-child(2)::before {
+    content: '📚';
+    font-size: 1.4rem;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+    animation: bookFloat 3s ease-in-out infinite alternate;
+}
+
+@keyframes educationGlow {
+    0% {
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.4);
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+    }
+    100% {
+        text-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.7);
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9));
+    }
+}
+
+@keyframes bookFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-3px);
+    }
+}
+
+/* More page specific styling */
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(1)::before {
+    content: '🏆';
+}
+
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(2)::before {
+    content: '⭐';
+}
+
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(3)::before {
+    content: '💼';
+}
+
+.profile-card:has(.cute-symbols:contains("🦄")) .resume-list li:nth-child(4)::before {
+    content: '🌸';
+}
+
+/* Individual card stagger animation */
+.resume-list li:nth-child(1) {
+    animation: slideInUp 0.6s ease-out 0.1s both;
+}
+
+.resume-list li:nth-child(2) {
+    animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.resume-list li:nth-child(3) {
+    animation: slideInUp 0.6s ease-out 0.3s both;
+}
+
+.resume-list li:nth-child(4) {
+    animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.resume-list li:nth-child(5) {
+    animation: slideInUp 0.6s ease-out 0.5s both;
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .resume-list li {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .resume-list li::before {
+        top: 0.6rem;
+        left: 0.6rem;
+        font-size: 1rem;
+    }
+}
